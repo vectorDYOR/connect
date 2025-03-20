@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Library</OutputType>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<StartArguments></StartArguments>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <OutputPath>C:\Users\psf\AppData\Roaming\Grasshopper\Libraries\Connect\</OutputPath>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Optimize>false</Optimize>
+    <DocumentationFile></DocumentationFile>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <WarningsAsErrors>NU1605</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Core\**" />
+    <EmbeddedResource Remove="Core\**" />
+    <None Remove="Core\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Connect.csproj.old" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Grasshopper" Version="6.24.20079.23341" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy32.dll" />
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\contentFiles\any\net452\Core\Compression\Snappy\lib\win\snappy32.dll" />
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\contentFiles\any\net452\Core\Compression\Snappy\lib\win\snappy64.dll" />
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\contentFiles\any\net452\Core\Compression\Zstandard\lib\win\libzstd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/libzstd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy64.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="C:\Users\psf\.nuget\packages\mongodb.driver.core\2.11.2\build\../runtimes/win/native/snappy32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+	<Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="Erase $(TargetPath) $(TargetDir)$(TargetName)&quot;.gha&quot;" />
+  </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="Copy $(TargetPath) $(TargetDir)$(TargetName)&quot;.gha&quot; &amp;&amp; Erase $(TargetPath)" />
+  </Target>
+  <Target Name="PreventGrasshopperCopyLocal" AfterTargets="ResolveReferences">
+  	<ItemGroup>
+  		<ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'Grasshopper'" />
+  	</ItemGroup>
+  </Target>
+</Project>
