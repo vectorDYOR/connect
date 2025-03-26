@@ -10,7 +10,7 @@ With this plug-in you still open and run files locally, but the plug-in offers t
 
 It even displays published name and versions above each cluster.
 
-Some principles in its design:
+## Some principles in its design:
 
 offer as much functionality within the Grasshopper window itself, at least for day-to-day actions
 avoid proprietary platforms (GitHub doesn’t count in my book as it’s so generic)
